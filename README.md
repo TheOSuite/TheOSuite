@@ -48,7 +48,7 @@ The suite includes a centralized GUI launcher for easy access to all tools:
 
 1. Run the launcher:
    ```
-   python central_gui.py
+   python TheOSuite.py
    ```
 
 2. In the GUI window, select a tool from the list and click "Launch Selected Tool". This will open the chosen tool's interface in a new window.
