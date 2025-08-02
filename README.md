@@ -1,4 +1,6 @@
 # TheOSuite
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![License](https://img.shields.io/github/license/TheOSuite/oLSM)
 
 TheOSuite is a comprehensive, open-source collection of security testing tools designed for identifying vulnerabilities, misconfigurations, and compliance issues in web applications, networks, and systems. Each tool focuses on specific aspects of security, such as XSS detection, cryptographic failures, access control testing, and more. This suite consolidates them into a single repository for easy access and management, with a centralized GUI launcher for seamless usage.
 
