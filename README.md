@@ -55,14 +55,6 @@ The suite includes a centralized GUI launcher for easy access to all tools:
 
 Each tool can also be run independently by navigating to its directory and executing its entry script (e.g., `cd oXSS && python oXSS.py`). See the tool's README for specific commands and options.
 
-## Contributing
-
-Contributions are welcome! If you'd like to add features, fix bugs, or suggest improvements:
-- Fork the repository.
-- Create a new branch for your changes.
-- Submit a pull request with a clear description.
-
-Please ensure your contributions align with the existing code style and include updates to relevant README files.
 
 ## License
 
