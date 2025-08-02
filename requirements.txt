@@ -1,0 +1,7 @@
+requests
+beautifulsoup4
+selenium
+webdriver-manager
+lxml
+packaging
+bandit  # Optional for some tools
