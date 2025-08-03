@@ -5,3 +5,6 @@ webdriver-manager
 lxml
 packaging
 bandit  # Optional for some tools
+twilio
+pyotp
+jsonpath_ng
