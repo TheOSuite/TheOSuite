@@ -17,7 +17,7 @@ Here is a list of all included tools, with brief descriptions. For full details,
 - **oLSM: Local Security Monitor** - Monitors local system security and detects potential threats.
 - **oMITM: Man In The Middle Attack Tester** - Simulates and tests for man-in-the-middle attacks.
 - **oPFC: Privacy Framework Checklist** - Provides a checklist for privacy framework compliance.
-- **oPKI: ePKI - A Certificate Authority and Certificate Management Utility** - Manages certificates and acts as a simple certificate authority.
+- **oPKI: A Certificate Authority and Certificate Management Utility** - Manages certificates and acts as a simple certificate authority.
 - **oSDIS: Software and Data Integrity Scanner** - Scans for integrity issues in software and data.
 - **oSLMF: Security Logging and Monitoring Failures Tester** - Tests for failures in security logging and monitoring.
 - **oSMS: Security Misconfiguration Scanner** - Scans for security misconfigurations in systems and applications.
