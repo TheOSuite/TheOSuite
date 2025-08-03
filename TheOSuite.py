@@ -5,24 +5,24 @@ import os
 import sys
 
 # Config: Map tool names to their submodule dir and entry script
-# Update this dict based on your repos (e.g., from READMEs: oXSS -> 'oXSS.py', oVOC -> 'gui.py')
+# Updated based on the repository details and entry points
 TOOLS = {
-    'oXSS: Enhanced XSS Scanner': {'dir': 'oXSS', 'entry': 'oXSS.py'},
-    'oVOC: Vulnerable Components Tester': {'dir': 'oVOC', 'entry': 'gui.py'},
-    'oPFC: Privacy Framework Checklist': {'dir': 'oPFC', 'entry': 'main.py'},  # Assume; verify
-    'oIAF: Auth Failures Tester': {'dir': 'oIAF', 'entry': 'oIAF.py'},  # Assume; verify
-    'oSSRF: SSRF Tester': {'dir': 'oSSRF', 'entry': 'oSSRF.py'},
-    'oSLMF: Logging Failures Tester': {'dir': 'oSLMF', 'entry': 'oSLMF.py'},
-    'oBAC: Access Control Tester': {'dir': 'oBAC', 'entry': 'oBAC.py'},
-    'oSSLC: SSL Analyzer': {'dir': 'oSSLC', 'entry': 'oSSLC.py'},
-    'oMITM: MITM Tester': {'dir': 'oMITM', 'entry': 'oMITM.py'},
-    'oPKI: PKI Manager': {'dir': 'oPKI', 'entry': 'oPKI.py'},
+    'oBAC: Broken Access Control Testing Application': {'dir': 'oBAC', 'entry': 'oBAC.py'},
+    'oCF: Cryptographic Failure Testing Application': {'dir': 'oCF', 'entry': 'oCF.py'},
+    'oIAF: Identification and Authentication Failures Tester': {'dir': 'oIAF', 'entry': 'oIAF.py'},
+    'oJSS3: S3 Bucket and JavaScript Endpoint Extractor': {'dir': 'oJSS3', 'entry': 'oJSS3.py'},
     'oLSM: Local Security Monitor': {'dir': 'oLSM', 'entry': 'oLSM.py'},
-    'oJSS3: S3/JS Extractor': {'dir': 'oJSS3', 'entry': 'oJSS3.py'},
-    'paygen: Payload Generator': {'dir': 'paygen', 'entry': 'paygen.py'},
-    'oSMS: Misconfig Scanner': {'dir': 'oSMS', 'entry': 'oSMS.py'},
-    'oSDIS: Integrity Scanner': {'dir': 'oSDIS', 'entry': 'oSDIS.py'},
-    'oCF: Crypto Failures Tester': {'dir': 'oCF', 'entry': 'oCF.py'},
+    'oMITM: Man In The Middle Attack Tester': {'dir': 'oMITM', 'entry': 'oMITM.py'},
+    'oPFC: Privacy Framework Checklist': {'dir': 'oPFC', 'entry': 'oPFC.py'},  # Assumed; verify if it's a script
+    'oPKI: A Certificate Authority and Certificate Management Utility': {'dir': 'oPKI', 'entry': 'oPKI.py', 'args': ['--gui']},
+    'oSDIS: Software and Data Integrity Scanner': {'dir': 'oSDIS', 'entry': 'oSDIS.py'},
+    'oSLMF: Security Logging and Monitoring Failures Tester': {'dir': 'oSLMF', 'entry': 'oSLMF.py'},
+    'oSMS: Security Misconfiguration Scanner': {'dir': 'oSMS', 'entry': 'oSMS.py'},
+    'oSSLC: SSL Certificate Analyzer': {'dir': 'oSSLC', 'entry': 'oSSLC.py'},
+    'oSSRF: Server-Side Request Forgery Testing Utility': {'dir': 'oSSRF', 'entry': 'oSSRF.py'},
+    'oVOC: Vulnerable and Outdated Components Tester': {'dir': 'oVOC', 'entry': 'gui.py'},
+    'oXSS: Enhanced Cross Site Scripting Scanner': {'dir': 'oXSS', 'entry': 'oXSS.py'},
+    'paygen: Payload Generator': {'dir': 'paygen', 'entry': 'paygen.py'}
 }
 
 def launch_tool(tool_name):
@@ -31,7 +31,7 @@ def launch_tool(tool_name):
         return
     
     tool = TOOLS[tool_name]
-    base_dir = os.path.dirname(os.path.abspath(__file__))  # MainSuite dir
+    base_dir = os.path.dirname(os.path.abspath(__file__))  # Main suite dir
     tool_path = os.path.join(base_dir, tool['dir'], tool['entry'])
     
     if not os.path.exists(tool_path):
@@ -39,8 +39,9 @@ def launch_tool(tool_name):
         return
     
     try:
-        # Launch in new process (non-blocking)
-        subprocess.Popen([sys.executable, tool_path], cwd=os.path.join(base_dir, tool['dir']))
+        # Launch in new process (non-blocking), including any optional args
+        command = [sys.executable, tool_path] + tool.get('args', [])
+        subprocess.Popen(command, cwd=os.path.join(base_dir, tool['dir']))
         messagebox.showinfo("Success", f"Launched {tool_name}")
     except Exception as e:
         messagebox.showerror("Launch Error", f"Failed to launch {tool_name}: {str(e)}")
@@ -48,7 +49,7 @@ def launch_tool(tool_name):
 # GUI Setup
 root = tk.Tk()
 root.title("TheOSuite Central Launcher")
-root.geometry("400x400")
+root.geometry("600x400")
 
 label = tk.Label(root, text="Select a tool to launch:", pady=10)
 label.pack()
@@ -57,7 +58,7 @@ label.pack()
 scrollbar = Scrollbar(root)
 scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
-listbox = Listbox(root, yscrollcommand=scrollbar.set, height=15, width=50)
+listbox = Listbox(root, yscrollcommand=scrollbar.set, height=15, width=80)
 for tool in sorted(TOOLS.keys()):
     listbox.insert(END, tool)
 listbox.pack(pady=10)
